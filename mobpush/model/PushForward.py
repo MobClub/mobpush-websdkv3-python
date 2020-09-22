@@ -4,7 +4,7 @@ from mobpush.model.BasePush import BasePush
 
 class PushForward(BasePush):
     def __init__(self, nextType=1, url=None, scheme=None, schemeDataList=[]):
-        self.data={
+        self.data = {
             'nextType': nextType,
             # 0 打开首页 1 url跳转 2  scheme 跳转
             'url': url,

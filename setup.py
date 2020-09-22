@@ -4,12 +4,12 @@ import sys
 
 setup(
     name="mobPushSdkV3",
-    version="0.0.1",
+    version="2.0.0",
     author="yylu",
     author_email="yylu@yoozoo.com",
     description="Python Framework.",
     license="MIT",
-    url="",
+    url="https://github.com/MobClub/mobpush-websdkv3-python",
     packages=find_packages(),
     include_package_data=True,
     classifiers=[
@@ -22,10 +22,9 @@ setup(
         'Operating System :: Unix',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.7',
     ],
     install_requires=[
-            'requests>=2.24.0',  #所需要包的版本号
+        'requests>=2.24.0',  # 所需要包的版本号
     ],
     zip_safe=True,
 )

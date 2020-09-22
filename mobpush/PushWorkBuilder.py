@@ -27,31 +27,31 @@ class PushWorkBuilder(object):
     def setTargetAll(self, workNo, title, content):
         self.fillParams(workNo=workNo, title=title, content=content)
         self.push['PushTarget']['target'] = self.TARGET_ALL
-        return self.push
+        return self
 
     def setTargetByAlias(self, workNo, title, content, alias):
         self.fillParams(workNo=workNo, title=title, content=content)
         self.push['PushTarget']['target'] = self.TARGET_ALIAS
         self.push['PushTarget']['alias'] = list(alias)
-        return self.push
+        return self
 
     def setTargetTags(self, workNo, title, content, tags):
         self.fillParams(workNo=workNo, title=title, content=content)
         self.push['PushTarget']['target'] = self.TARGET_TAGS
         self.push['PushTarget']['tags'] = list(tags)
-        return self.push
+        return self
 
     def setTargetRids(self, workNo, title, content, rids):
         self.fillParams(workNo=workNo, title=title, content=content)
         self.push['PushTarget']['target'] = self.TARGET_RIDS
         self.push['PushTarget']['rids'] = list(rids)
-        return self.push
+        return self
 
     def setTargetByAreas(self, workNo, title, content, pushAreas):
         self.fillParams(workNo=workNo, title=title, content=content)
         self.push['PushTarget']['target'] = self.TARGET_AREAS
         self.push['PushTarget']['pushAreas'] = pushAreas.get_result()
-        return self.push
+        return self
 
     def setNotifyExtraParams(self, key, value):
         push_map = {
@@ -59,11 +59,11 @@ class PushWorkBuilder(object):
             'value': value
         }
         self.push['pushNotify']['extrasMapList'].append(push_map)
-        return self.push
+        return self
 
     def setNotifyExtraMap(self, extra_map):
         self.push['pushNotify']['extrasMapList'] = self.getExtraParamsList(extra_map)
-        return self.push
+        return self
 
     def setForwardExtraParams(self, key, value):
         push_map = {
@@ -71,11 +71,11 @@ class PushWorkBuilder(object):
             'value': value
         }
         self.push['pushNotify']['schemeDataList'].append(push_map)
-        return self.push
+        return self
 
     def setForwardExtraMap(self, extra_map):
         self.push['pushNotify']['schemeDataList'] = self.getExtraParamsList(extra_map)
-        return self.push
+        return self
 
     def getExtraParamsList(self, extra_map):
         push_map_list = []
@@ -85,4 +85,3 @@ class PushWorkBuilder(object):
                 'value': str(extra_map.get(k))
             })
         return push_map_list
-

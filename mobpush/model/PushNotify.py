@@ -8,9 +8,9 @@ class IosNotify(BasePush):
     BADGE_TYPE_ADD = 2
     SLIENT = 1
 
-    def __init__(self, title=None, subtitle=None, attachment=None, attachmentType=None,
-                 mutableContent=None, contentAvailable=None, slientPush=None,
-                 category=None, badgeType=None, badge=None, sound='default'):
+    def __init__(self, title=None, subtitle=None, attachment=None,
+                 attachmentType=None, mutableContent=None, contentAvailable=None,
+                 slientPush=None, category=None, badgeType=None, badge=None, sound='default'):
         self.data = {
             'title': title,
             # 标题- 不填写则为应用名称
@@ -82,6 +82,12 @@ class PushNotify(BasePush):
             # 是否是定时任务：0否，1是，默认0
             'taskTime': taskTime,
             # 定时消息 发送时间
+            'speed': 0,
+            # 定速推送, 设置平均每秒推送速度
+            # 0: 不限制
+            # 其他限制速度
+            # 例如: 每秒1条,每秒100条, 建议最小设置为100条
+            # 这个只是模糊的控制, 只保证推送整体上的平均数值, 比如设置为1, 每5秒推送一条
             'plats': plats,
             # 可使用平台，1 android;2 ios ;3 winphone(暂不使用) ;
             'iosProduction': iosProduction,

@@ -11,6 +11,7 @@ class PushV3Client(object):
     CANCEL_TASK_URI = '/push/drop'
     REPLACE_TASK_URI = '/push/replace'
     RECALL_TASK_URI = '/push/recall'
+    PUSH_MULTI = '/v3/push/createMulti'
 
     def __init__(self, app_key, app_secret):
         """
@@ -28,10 +29,10 @@ class PushV3Client(object):
         :param push: dict
         :return: json
         """
-        push['Appkey']=self.app_key
+        push['Appkey'] = self.app_key
         url = self.baseUrl + self.PUSH_URI
         params = push
-        result = self.send.get_result(url=url, data=params)
+        result = self.send.post(url=url, data=params)
         return result
 
     def pushAll(self, workNo, title, content):
@@ -44,7 +45,7 @@ class PushV3Client(object):
         """
         result = self.pushTaskV3(PushWorkBuilder(self.app_key).setTargetAll(workNo=workNo,
                                                                             title=title,
-                                                                            content=content))
+                                                                            content=content).build())
         return result
 
     def pushByAlias(self, workNo, title, content, *alias):
@@ -60,7 +61,7 @@ class PushV3Client(object):
         result = self.pushTaskV3(PushWorkBuilder(self.app_key).setTargetByAlias(workNo=workNo,
                                                                                 title=title,
                                                                                 content=content,
-                                                                                alias=alias))
+                                                                                alias=alias).build())
         return result
 
     def pushByTags(self, workNo, title, content, *tags):
@@ -76,7 +77,7 @@ class PushV3Client(object):
         result = self.pushTaskV3(PushWorkBuilder(self.app_key).setTargetTags(workNo=workNo,
                                                                              title=title,
                                                                              content=content,
-                                                                             tags=tags))
+                                                                             tags=tags).build())
         return result
 
     def pushByRids(self, workNo, title, content, *rids):
@@ -92,7 +93,7 @@ class PushV3Client(object):
         result = self.pushTaskV3(PushWorkBuilder(self.app_key).setTargetRids(workNo=workNo,
                                                                              title=title,
                                                                              content=content,
-                                                                             rids=rids))
+                                                                             rids=rids).build())
         return result
 
     def pushByAreas(self, workNo, title, content, pushAreas):
@@ -107,7 +108,7 @@ class PushV3Client(object):
         result = self.pushTaskV3(PushWorkBuilder(self.app_key).setTargetByAreas(workNo=workNo,
                                                                                 title=title,
                                                                                 content=content,
-                                                                                pushAreas=pushAreas))
+                                                                                pushAreas=pushAreas).build())
         return result
 
     def getPushByBatchId(self, workId):
@@ -175,4 +176,9 @@ class PushV3Client(object):
         }
         url = self.baseUrl + self.RECALL_TASK_URI
         result = self.send.get_result(url=url, data=params)
+        return result
+
+    def pushMulti(self, push_multi):
+        url = self.baseUrl + self.PUSH_MULTI
+        result = self.send.post(url=url, data=push_multi)
         return result
